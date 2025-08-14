@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rocky AI - IA Futurista</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+<link rel="icon" href="RockyAI_Icon_256x256x32.png" type="image/png">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #121124;
+    color: white;
+  }
+
+  /* Gradientes animados del logo */
+  .gradient-logo {
+    background: linear-gradient(135deg, #0e6cdb, #00bbe4, #185cd3, #5d2fca);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+  }
+  @keyframes gradientAnimation {
+    0% {background-position:0% 50%;}
+    50% {background-position:100% 50%;}
+    100% {background-position:0% 50%;}
+  }
+  .text-logo-gradient {
+    background: linear-gradient(90deg, #0e6cdb, #00bbe4, #185cd3, #5d2fca);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .neon-button {
+    background: #00bbe4;
+    color: #121124;
+    box-shadow: 0 0 10px #00bbe4, 0 0 20px #00bbe4, 0 0 30px #00bbe4;
+    transition: all 0.3s ease;
+  }
+  .neon-button:hover {
+    box-shadow: 0 0 20px #0e6cdb, 0 0 40px #0e6cdb, 0 0 60px #0e6cdb;
+    transform: scale(1.05);
+  }
+
+  #particle-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 5px #00bbe4, 0 0 10px #0e6cdb, 0 0 20px #185cd3;
+  }
+</style>
+</head>
+<body>
+
+<!-- Canvas de partículas -->
+<canvas id="particle-canvas"></canvas>
+
+<!-- Header -->
+<header class="relative h-screen flex flex-col justify-center items-center text-center">
+  <img src="RockyAI_Icon_512x512x32.png" alt="Rocky AI Logo" class="w-32 h-32 mb-6 animate-bounce">
+  <h1 class="text-6xl font-extrabold mb-4 text-logo-gradient glow-text">Rocky AI</h1>
+  <p class="text-2xl max-w-3xl mb-8 drop-shadow-md">Explorando tecnología e inteligencia artificial para potenciar tu mundo digital de forma inteligente y segura.</p>
+  <a href="#contacto" class="neon-button px-8 py-4 rounded-full font-bold text-2xl">Contáctanos</a>
+</header>
+
+<!-- Sección Innovación -->
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-5xl font-bold mb-6 text-[#00bbe4] glow-text">Innovación en Tecnología</h2>
+    <p class="text-gray-200 text-xl max-w-3xl mx-auto leading-relaxed">Rocky AI integra herramientas avanzadas de inteligencia artificial para optimizar procesos, automatizar tareas y mejorar la experiencia digital en todos los niveles de tu negocio o proyecto personal.</p>
+  </div>
+</section>
+
+<!-- Sección Servicios -->
+<section class="py-24 bg-[#121124]">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-5xl font-bold mb-12 text-[#00bbe4] glow-text">Lo que ofrecemos</h2>
+    <div class="grid md:grid-cols-3 gap-12">
+      <div class="bg-[#1a1a2e] rounded-3xl p-10 shadow-2xl hover:scale-105 transform transition duration-500">
+        <div class="text-6xl mb-4 text-[#0e6cdb]">💡</div>
+        <h3 class="text-3xl font-bold mb-3 text-[#c9efff] glow-text">Automatización</h3>
+        <p class="text-gray-300 text-lg">Optimiza tus procesos diarios y tareas repetitivas con IA para ganar tiempo y eficiencia.</p>
+      </div>
+      <div class="bg-[#1a1a2e] rounded-3xl p-10 shadow-2xl hover:scale-105 transform transition duration-500">
+        <div class="text-6xl mb-4 text-[#185cd3]">📈</div>
+        <h3 class="text-3xl font-bold mb-3 text-[#c9efff] glow-text">Análisis de Datos</h3>
+        <p class="text-gray-300 text-lg">Identifica tendencias y oportunidades con análisis avanzados impulsados por inteligencia artificial.</p>
+      </div>
+      <div class="bg-[#1a1a2e] rounded-3xl p-10 shadow-2xl hover:scale-105 transform transition duration-500">
+        <div class="text-6xl mb-4 text-[#5d2fca]">🤝</div>
+        <h3 class="text-3xl font-bold mb-3 text-[#c9efff] glow-text">Asistencia Digital</h3>
+        <p class="text-gray-300 text-lg">Interactúa con un asistente inteligente que entiende tus necesidades y te guía en tu mundo digital.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Sobre Rocky -->
+<section class="py-24 gradient-logo">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h2 class="text-5xl font-bold mb-8 text-[#c9efff] glow-text">Sobre Rocky</h2>
+    <p class="text-gray-100 text-xl leading-relaxed">Rocky es un asistente de inteligencia artificial diseñado para facilitar la interacción con tecnología avanzada, análisis de datos y creación de contenido digital de forma segura y profesional. Integra herramientas modernas que se adaptan a tus necesidades y proyectos.</p>
+  </div>
+</section>
+
+<!-- Sección Contacto -->
+<section id="contacto" class="py-24 bg-[#121124] text-center">
+  <h2 class="text-5xl font-bold mb-6 text-[#00bbe4] glow-text">Contacto</h2>
+  <p class="mb-8 text-gray-200 text-xl">¿Tienes preguntas o quieres más información? Escríbenos a:</p>
+  <a href="mailto:tiktok@rockyai.sbs" class="neon-button px-10 py-4 rounded-full font-bold text-2xl">tiktok@rockyai.sbs</a>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[#121124] text-white p-6 text-center">
+  © 2025 Rocky AI. Todos los derechos reservados. <br>
+  <a href="#header" class="text-[#00bbe4] hover:underline">Volver arriba</a>
+</footer>
+
+<script>
+  // Three.js: partículas que siguen el cursor
+  const canvas = document.getElementById('particle-canvas');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:true});
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.position.z = 50;
+
+  const particleCount = 1500;
+  const positions = new Float32Array(particleCount*3);
+  const velocities = new Float32Array(particleCount*3);
+
+  for(let i=0;i<particleCount*3;i+=3){
+    positions[i] = (Math.random()-0.5)*200;
+    positions[i+1] = (Math.random()-0.5)*200;
+    positions[i+2] = (Math.random()-0.5)*200;
+    velocities[i] = (Math.random()-0.5)*0.05;
+    velocities[i+1] = (Math.random()-0.5)*0.05;
+    velocities[i+2] = (Math.random()-0.5)*0.05;
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions,3));
+  const material = new THREE.PointsMaterial({size:1.5, color:0x00bbe4, transparent:true});
+  const points = new THREE.Points(geometry, material);
+  scene.add(points);
+
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', e => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 100;
+    mouseY = -(e.clientY / window.innerHeight - 0.5) * 100;
+  });
+
+  function animate(){
+    requestAnimationFrame(animate);
+    const positions = points.geometry.attributes.position.array;
+    for(let i=0;i<particleCount*3;i+=3){
+      positions[i] += velocities[i] + mouseX*0.0005;
+      positions[i+1] += velocities[i+1] + mouseY*0.0005;
+    }
+    points.geometry.attributes.position.needsUpdate = true;
+    points.rotation.y += 0.0005;
+    points.rotation.x += 0.0003;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize',()=>{
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // GSAP Scroll Animations
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray('section').forEach(section => {
+    gsap.from(section, {
+      opacity: 0,
+      y: 120,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        toggleActions: "play none none none"
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
